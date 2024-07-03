@@ -9,5 +9,13 @@ export interface species{
     origin: {
         name: string;
         url: string;
-    }
+    };
+    location: {
+        name: string;
+        url: string;
+    };
+    image: string;
+    episode: string[]; // Array de URLs de episodios
+    url: string;
+    created: string;
 }

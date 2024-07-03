@@ -1,6 +1,15 @@
 import { Component } from '@angular/core';
 import { MaterialModule } from '../angular-material/material/material.module';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { species } from './species';
+import { SpeciesService } from './species.service';
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
 
 @Component({
   selector: 'app-species-human',
@@ -11,15 +20,33 @@ import { RouterOutlet } from '@angular/router';
 })
 export class SpeciesHumanComponent {
 
-  irHome(): void{
+  displayedColumns: string[] = ['id', 'name', 'status', 'species', 'type', 'gender', 'origin', 'location', 'image', 'episode', 'url', 'created'];
 
-  }
+  species: species[] = []
 
+constructor(private speciesService: SpeciesService, private router: Router, private route: ActivatedRoute){
+
+}
   irSpeciesHuman(): void{
-
+    this.router.navigate(["species"], {relativeTo: this.route})
   }
 
   irCorreo(): void{
-    
+
+  }
+
+  ngOnInit(): void{
+    this.speciesService.getHumanSpecies().subscribe((data) => {
+      console.log(data);
+      this.species = data;
+    });
+  }
+
+  getLimitedEpisodes(episodes: string[]): string {
+    if (episodes.length <= 3) {
+      return episodes.join(', ');
+    } else {
+      return episodes.slice(0, 3).join(', ') + '...';
+    }
   }
 }
