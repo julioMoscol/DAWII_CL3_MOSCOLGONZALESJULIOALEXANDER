@@ -4,13 +4,6 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { species } from './species';
 import { SpeciesService } from './species.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
 @Component({
   selector: 'app-species-human',
   standalone: true,
@@ -28,11 +21,11 @@ constructor(private speciesService: SpeciesService, private router: Router, priv
 
 }
   irSpeciesHuman(): void{
-    this.router.navigate(["species"], {relativeTo: this.route})
+    this.router.navigateByUrl("species")
   }
 
   irCorreo(): void{
-
+    this.router.navigateByUrl("correo")
   }
 
   ngOnInit(): void{
